@@ -29,7 +29,14 @@ DeviceAPI.register = function(req, res){
   if(DeviceModel.validateTokenType(token, osType) === null)
     return res.json({success: false, message: 'device token not invalid'})
 
-  res.json({success: true})
+  // check if it exist before
+  DeviceModel.findByToken(token, function(docs){
+    if(docs.length > 0)
+      return res.json({success: false, message: 'device token inserted before'})
+
+    res.json({success: true})
+  });
+
 }
 
 module.exports = DeviceAPI

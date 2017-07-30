@@ -20,4 +20,11 @@ DeviceModel.validateTokenType = function(token, type){
   return null
 }
 
+DeviceModel.findByToken = function(token, cb){
+  db.collection("devices").find({token: token}).toArray(function(err, docs) {
+    if(err) throw err
+    return cb(docs)
+  });
+}
+
 module.exports = DeviceModel
