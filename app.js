@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const PORT = 8990
 const bodyParser = require('body-parser')
+const DB = require('./configs/db')
 
 // parse application/json
 app.use(bodyParser.json())
@@ -14,6 +15,10 @@ app.post('/api/v1/device/register', function(req, res){
   return DeviceController.register(req, res)
 })
 
-app.listen(PORT, function () {
-  console.log(`server listening on port ${PORT}!`)
+DB.initialize(function(err){
+  app.listen(PORT, function () {
+    // DB
+    db = DB.db
+    console.log(`server listening on port ${PORT}!`)
+  })
 })
