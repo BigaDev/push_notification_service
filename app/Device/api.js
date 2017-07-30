@@ -34,9 +34,11 @@ DeviceAPI.register = function(req, res){
     if(docs.length > 0)
       return res.json({success: false, message: 'device token inserted before'})
 
-    res.json({success: true})
-  });
-
+    // insert device into DB
+    DeviceModel.insert(token, osType, function(){
+      res.json({success: true, message: 'device token has been inserted successfully'})
+    })
+  })
 }
 
 module.exports = DeviceAPI

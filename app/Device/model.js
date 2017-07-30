@@ -27,4 +27,11 @@ DeviceModel.findByToken = function(token, cb){
   });
 }
 
+DeviceModel.insert = function(token, os, cb){
+  db.collection("devices").insertOne({token: token, os: os, created_at: new Date()}, function(err, res) {
+    if (err) throw err
+    return cb(res)
+  });
+}
+
 module.exports = DeviceModel
