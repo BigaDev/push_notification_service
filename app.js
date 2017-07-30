@@ -3,6 +3,8 @@ const app = express()
 const PORT = 8990
 const bodyParser = require('body-parser')
 const DB = require('./configs/db')
+const fs = require('fs')
+const config = JSON.parse(fs.readFileSync('./configs/configs.json', 'utf8'))
 
 // parse application/json
 app.use(bodyParser.json())

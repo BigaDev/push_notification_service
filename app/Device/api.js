@@ -1,6 +1,9 @@
 // Device Model
 const DeviceModel = require('./model')
 
+// Device Service
+const DeviceService = require('./service')
+
 // Device Controller
 function DeviceAPI(){
 
@@ -41,4 +44,33 @@ DeviceAPI.register = function(req, res){
   })
 }
 
+/* Push API Handler
+ input: APN or GCM token
+ process: validate token then send notification
+ output: success => true if it sent or false with errors messages
+*/
+DeviceAPI.push = function(req, res){
+  // check exist of params
+  if(req.body.token === undefined)
+    return res.json({success: false, message: 'device token must be sent'})
+
+  let token = req.body.token
+  // check if it exist before
+  DeviceModel.findByToken(token, function(docs){
+    if(docs.length === 0)
+      return res.json({success: false, message: 'device token not found'})
+
+    let osType = docs[0].os
+
+    // send notification
+    DeviceService.push(osType, token, function(err, status){
+      if(err)
+        res.json({success: false, message: err})
+      if(status)
+        res.json({success: true, message: 'notification has been sent successfully'})
+      else
+        res.json({success: false, message: 'notification has not been sent'})
+    })
+  })
+}
 module.exports = DeviceAPI
