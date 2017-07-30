@@ -1,7 +1,8 @@
 {
   "keys": {
     "ios": {
-      "UID": "com.pushbots.logapp"
+      "UID": "com.pushbots.logapp",
+      "certPath": "/home/ahmed-gaber/Projects/pushbots/configs/ios_cert.p8"
     },
     "android": {
       "APIkey": "AIzaSyAcDkr8-aXdZGWzEk2BRCW5ujwjXzEojFw"
