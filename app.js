@@ -17,6 +17,11 @@ app.post('/api/v1/device/register', function(req, res){
   return DeviceController.register(req, res)
 })
 
+// Push Token
+app.post('/api/v1/device/push', function(req, res){
+  return DeviceController.push(req, res)
+})
+
 DB.initialize(function(err){
   app.listen(PORT, function () {
     // DB
