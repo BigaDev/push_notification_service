@@ -1,0 +1,10 @@
+{
+  "keys": {
+    "ios": {
+      "UID": "com.pushbots.logapp"
+    },
+    "android": {
+      "APIkey": "AIzaSyAcDkr8-aXdZGWzEk2BRCW5ujwjXzEojFw"
+    }
+  }
+}
